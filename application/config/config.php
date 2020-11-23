@@ -42,7 +42,7 @@ date_default_timezone_set('Asia/Kolkata');
 $config['base_url'] = 'http://192.168.25.184:82/nfs/';
 
 
-$config['projectTitle'] = 'NewsFlow';
+$config['projectTitle'] = 'NewsFlow rahul';
 /*
 |--------------------------------------------------------------------------
 | Index File
