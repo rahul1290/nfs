@@ -38,8 +38,8 @@ date_default_timezone_set('Asia/Kolkata');
 | a PHP script and you can easily do that on your own.
 |
 */
-//$config['base_url'] = 'http://emp2.ibc24.in/nfs/';
-$config['base_url'] = 'http://192.168.25.184:82/nfs/';
+$config['base_url'] = 'http://emp2.ibc24.in/nfs/';
+//$config['base_url'] = 'http://192.168.25.184:82/nfs/';
 
 
 $config['projectTitle'] = 'NewsFlow';
