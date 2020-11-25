@@ -42,7 +42,7 @@ $config['base_url'] = 'http://emp2.ibc24.in/nfs/';
 //$config['base_url'] = 'http://192.168.25.184:82/nfs/';
 
 
-$config['projectTitle'] = 'NewsFlow';
+$config['projectTitle'] = 'NewsFlow rahul';
 /*
 |--------------------------------------------------------------------------
 | Index File

@@ -55,6 +55,53 @@ class Assignment_model extends CI_Model {
         return $result;
     }
     
+    function assign_feed_detail_submit($sno,$data){
+        if($data['Assign_Status'] == 'Reject.jpg'){ 
+            $this->db->query("update feedInfo set 
+                    Assign_ID= '".$data['Assign_ID']."', 
+                    Assign_Status = '". $data['Assign_Status'] ."',
+                    Assign_Remarks=N'".$data['Assign_Remarks']."',
+                    Assign_date = '".date('Y-m-d H:i:s').'.000'."' ,
+                    Description = N'". $data['Description'] ."',
+                    VO = N'". $data['VO'] ."',
+                    Byte = N'". $data['Byte'] ."',
+                    A_Script = N'". $data['A_Script'] ."',
+                    A_VO = N'". $data['A_VO'] ."',
+                    A_Byte = N'". $data['A_Byte'] ."',
+                    A=0  where Sno = $sno "); 
+        } else {
+            
+            $this->db->query("update feedInfo set 
+                    Assign_ID= '".$data['Assign_ID']."', 
+                    Assign_Status = '". $data['Assign_Status'] ."',
+                    Assign_Remarks=N'".$data['Assign_Remarks']."',
+                    Assign_date = '".date('Y-m-d H:i:s').'.000'."' ,
+                    final_SlugID = '".$data['fslug']."',
+                    SlugID = '".$data['fslug']."',
+                    Description = N'". $data['Description'] ."',
+                    VO = N'". $data['VO'] ."',
+                    Byte = N'". $data['Byte'] ."',
+                    A_Script = N'". $data['A_Script'] ."',
+                    A_VO = N'". $data['A_VO'] ."',
+                    A_Byte = N'". $data['Byte'] ."',
+                    A='0'  where Sno = $sno ");
+            
+            $this->db->query("update feedtrans set slugId ='". $data['fslug'] ."'  where SlugId ='". $data['raw_slug'] ."'");
+        }
+        return true;
+    }
+    
+    
+    function check_slug($string){
+        $result = $this->db->query("select count(*) as count from feedInfo where Final_SlugID = '$string'")->result_array();
+        if($result[0]['count'] > 0){
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    
     function assign_report_today_activity(){
         $result = $this->db->query("select *,convert(varchar(5),Copy_date,108)  as Copy_Date1,convert(varchar(5),BP_date,108)  as BP_Date1,convert(varchar(5),VSat_date,108)  as Vsat_Date1,convert(varchar(5),VTEditor_date,108)  as VTEditor_Date1,convert(varchar(5),assign_date,108)  as Assign_Date1,convert(varchar(5),Input_date,108)  as Input_Date1,convert(varchar(5),Editor_date,108)  as Editor_Date1 ,convert(varchar(5),Output_date,108)  as Output_Date1   ,substring(LogSheet,1,50) as LogSheet1,substring(DESCRIPTION,1,50) as DESCRIPTION1  from FeedInfo where   Date = '".date('Y-m-d')."' order by Sno desc")->result_array();
         return $result;
