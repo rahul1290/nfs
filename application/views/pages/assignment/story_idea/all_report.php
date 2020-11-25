@@ -100,12 +100,10 @@
 			});
 			
 		$('#reservationdate').datetimepicker({
-			format: 'DD/MM/YYYY',
-			maxDate: new Date()
+			format: 'DD/MM/YYYY'
 		});
 		$('#reservationdate1').datetimepicker({
-			format: 'DD/MM/YYYY',
-			maxDate: new Date()	
+			format: 'DD/MM/YYYY'
 		});
 
 

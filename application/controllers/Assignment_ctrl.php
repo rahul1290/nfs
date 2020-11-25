@@ -42,7 +42,39 @@ class Assignment_ctrl extends CI_Controller {
 	    $data['body'] = $this->load->view('pages/assignment/assign_daily_feed_detail',$data,true);
 	    $this->load->view('common/layout',$data);
 	}
+	
+	
+	function assign_feed_detail_submit(){
+	    $data = array();
+	    $sno                       = $this->input->post('feedId');
+	    $data['Assign_ID']         = $this->session->userdata('uid');
+	    $data['Assign_Status']     = $this->input->post('status');
+	    $data['Assign_Remarks']    = $this->input->post('remark');
+	    $data['raw_slug']          = $this->input->post('fslug');
+	    $data['fslug']             = strtoupper($this->input->post('fslug'));
+	    $data['Assign_date']       = date('Y-m-d');
+	    $data['Description']       = trim(str_replace("'","''",$this->input->post('anchor')));
+	    $data['VO']                = trim(str_replace("'","''",$this->input->post('vo')));
+	    $data['Byte']              = trim(str_replace("'","''",$this->input->post('byte')));
+	    $data['A_Script']          = trim(str_replace("'","''",$this->input->post('logsheet')));
+	    $data['A_VO']              = trim(str_replace("'","''",$this->input->post('vo')));
+	    $data['A_Byte']            = trim(str_replace("'","''",$this->input->post('byte')));
+	    $data['A']                 = 0;
+	    
+	    if($this->Assignment_model->assign_feed_detail_submit($sno,$data)){
+	       echo json_encode(array('msg'=>'Feed updated successfully.','status'=>200));
+	    }
+	}
+	
 
+	function check_slug(){
+	    $slug = $this->input->post('slug');
+	    if(!$this->Assignment_model->check_slug($slug)){
+	        echo json_encode(array('status'=>200));
+	    } else {
+	        echo json_encode(array('status'=>500));
+	    }
+	}
 	
 	
 	function ftpUpload($file,$folderName,$original_file){

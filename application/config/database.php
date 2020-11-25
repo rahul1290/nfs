@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-//$active_group = 'stag';
-$active_group = 'prod';
+$active_group = 'stag';
+//$active_group = 'prod';
 $query_builder = TRUE;
 
 $db['stag'] = array(
