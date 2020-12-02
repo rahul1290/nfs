@@ -10,7 +10,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-			  <li class="breadcrumb-item"><a href="#">Story Idea</a></li>
+			  <li class="breadcrumb-item"><a href="#">Reports</a></li>
               <li class="breadcrumb-item active">All report</li>
             </ol>
           </div>
@@ -39,7 +39,7 @@
         					<div class="col-4">
         				  		From Date:
         							<div class="input-group date" id="reservationdate" data-target-input="nearest">
-        								<input type="text" name="fromdate" id="fromdate" class="form-control datetimepicker-input" data-target="#reservationdate" value="<?php if($this->uri->segment(5) != ''){ echo date('d/m/Y',strtotime($this->uri->segment(5))); } else { echo date('d/m/Y',strtotime('-1 day')); } ?>" />
+        								<input type="text" name="fromdate" id="fromdate" class="form-control datetimepicker-input" data-target="#reservationdate" value="<?php if($this->uri->segment(4) != ''){ echo date('d/m/Y',strtotime($this->uri->segment(4))); } else { echo date('d/m/Y',strtotime('-1 day')); } ?>" />
         								<div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
         									<div class="input-group-text"><i class="fa fa-calendar"></i></div>
         								</div>
@@ -125,7 +125,7 @@
 			var date1 = replaceAll($('#fromdate').val(), '/', '-');
 			var date2 = replaceAll($('#todate').val(), '/', '-');
 
-			window.location.replace(baseUrl + 'Assignment/story-idea/report/all-report/'+date1+'/'+date2);
+			window.location.replace(baseUrl + 'Assignment/report/all-report/'+date1+'/'+date2);
 		});
 
 
@@ -270,7 +270,7 @@
             		  						
             		  						x = x + onAir+'</td>'+
             		  						'<td>'+
-            		  							'<a target="_blank" href="'+ baseUrl +'Report/scriptFileReport/'+ value.Sno +'">'+
+            		  							'<a target="_blank" href="'+ baseUrl +'Assignment/report/all-report/scriptFileReport/'+ value.Sno +'">'+
             										'<img src="'+ baseUrl +'assets/images/viewMore.jpg"/>'+
             									'</a>'+
             								'</td>'+

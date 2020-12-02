@@ -42,7 +42,7 @@
       					<div class="col-6">
         					<table class="table text-center table-striped" border="1" id="example1">
         						<thead>
-            						<tr class="bg-success text-bold"><td colspan="5">GREEN ZONE</td></tr>
+            						<tr class="bg-success text-bold"><td colspan="5">CHATTISGARH [GREEN ZONE]</td></tr>
             						<tr id="cg_feeds_head" class="bg-dark text-light">
             							<td>LOCATION</td>
             							<td>NAME</td>
@@ -68,7 +68,7 @@
       					<div class="col-6">
         					<table class="table text-center table-striped" border="1" id="example2">
         						<thead>
-            						<tr class="bg-danger text-bold"><td colspan="5">RED ZONE</td></tr>
+            						<tr class="bg-danger text-bold"><td colspan="5">CHATTISGARH [RED ZONE]</td></tr>
             						<tr id="cg_feeds_head" class="bg-dark text-light">
             							<td>LOCATION</td>
             							<td>NAME</td>

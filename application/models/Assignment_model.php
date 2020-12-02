@@ -116,4 +116,72 @@ class Assignment_model extends CI_Model {
         $result = $this->db->query("select *,convert(varchar(5),Copy_date,108)  as Copy_Date1,convert(varchar(5),BP_date,108)  as BP_Date1,convert(varchar(5),Copy_date,108)  as Copy_Date1,convert(varchar(5),VSat_date,108)  as Vsat_Date1,convert(varchar(5),VTEditor_date,108)  as VTEditor_Date1,convert(varchar(5),assign_date,108)  as Assign_Date1,convert(varchar(5),Input_date,108)  as Input_Date1,convert(varchar(5),Editor_date,108)  as Editor_Date1 ,convert(varchar(5),Output_date,108)  as Output_Date1   ,substring(LogSheet,1,50) as LogSheet1,substring(DESCRIPTION,1,50) as DESCRIPTION1  from FeedInfo where Date='".$date."' ORDER BY SNO DESC")->result_array();
         return $result;
     }
+    
+    function all_reporter_location_list($location=null){
+        if(!is_null($location)){
+            $this->db->select('UID,NAME');
+            $result = $this->db->get_where('Login',array('Place'=>$location,'Active'=>'ACTIVE'))->result_array();
+        } else { 
+            $this->db->select('Place');
+            $this->db->group_by('PLACE');
+            $this->db->order_by('Place','asc'); 
+            $result = $this->db->get_where('Login',array('PERMISSION'=>'Reporter'))->result_array();
+        }
+        return $result;
+    }
+    
+    function reporter_report($data){
+        if($data['reporter'] == null || $data['reporter'] == ''){
+            $this->db->select('L.Name,L.UID,COUNT(*) as Count');
+            $this->db->from('FeedInfo F');
+            $this->db->join('Login L','F.Name=L.Name');
+            $this->db->where(array(
+                    'L.Permission'=>'reporter',
+                    'Place' =>$data['location'],
+                    'DATE >='=>$data['fromdate'],
+                    'DATE <='=>$data['todate']
+            ));
+            $this->db->group_by('L.Name,L.UID');
+            $this->db->order_by('Count','desc');
+            $result = $this->db->get()->result_array();
+            
+        } else {
+            $this->db->select('L.Name,COUNT(*) as Count');
+            $this->db->from('FeedInfo F');
+            $this->db->join('Login L','F.Name=L.Name');
+            $this->db->where(array(
+                    'L.Permission'=>'reporter',
+                    'f.UID'=> $data['reporter'],
+                    'DATE >=' =>$data['fromdate'],
+                    'DATE <=' => $data['todate'],
+                    'L.UID' => $data['reporter'],
+            ));
+            $this->db->group_by('L.Name');
+            $this->db->order_by('Count','desc');
+            $result = $this->db->get()->result_array();
+        }
+        return $result;
+    }
+    
+    function bifurcation($data){
+        $this->db->select('convert(varchar, F.Date, 103) Date,COUNT(*) as Count');
+        $this->db->from('FeedInfo F');
+        $this->db->join('Login L','F.Name=l.Name');
+        $this->db->where(array(
+            'l.Permission'=>'reporter',
+            'f.UID'=> $data['reporterId'],
+            'DATE >=' =>$data['fromdate'],
+            'DATE <=' => $data['todate'],
+            'L.UID' => $data['reporterId'],
+        ));
+        $this->db->group_by('F.Date');
+        $this->db->order_by('F.Date','asc');
+        $result = $this->db->get()->result_array();
+        return $result;
+    }
+    
+    function reportr_feed_list($date,$uid){
+        $result = $this->db->query("select *,convert(varchar(5),Copy_date,108)  as Copy_Date1,convert(varchar(5),BP_date,108)  as BP_Date1,convert(varchar(5),Copy_date,108)  as Copy_Date1,convert(varchar(5),VSat_date,108)  as Vsat_Date1,convert(varchar(5),VTEditor_date,108)  as VTEditor_Date1,convert(varchar(5),assign_date,108)  as Assign_Date1,convert(varchar(5),Input_date,108)  as Input_Date1,convert(varchar(5),Editor_date,108)  as Editor_Date1 ,convert(varchar(5),Output_date,108)  as Output_Date1   ,substring(LogSheet,1,50) as LogSheet1,substring(DESCRIPTION,1,50) as DESCRIPTION1  from FeedInfo where Date='".$date."' AND UID = '".$uid."' ORDER BY SNO DESC")->result_array();
+        return $result;
+    }
 }

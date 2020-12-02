@@ -40,11 +40,11 @@
     				</thead>
     				<tbody id="cg_feeds_body">
     					<tr>
-    						<td><?php echo $feed[0]['Date']; ?></td>
-    						<td><a href="#"><?php echo $feed[0]['Approved']; ?></a></td>
-    						<td><a href="#"><?php echo $feed[0]['Rejected']; ?></a></td>
-    						<td><a href="#"><?php echo $feed[0]['NotSeen']; ?></a></td>
-    						<td><?php echo $feed[0]['Total']; ?></td>
+    						<td><?= $feed[0]['Date'] ?? $feed[0]['Date'] ?? date('d/m/Y',strtotime('-1 day')); ?></td>
+    						<td><a href="#"><?= $feed[0]['Approved'] ?? $feed[0]['Approved'] ?? '0'; ?></a></td>
+    						<td><a href="#"><?= $feed[0]['Rejected'] ?? $feed[0]['Rejected'] ?? '0'; ?></a></td>
+    						<td><a href="#"><?= $feed[0]['NotSeen'] ?? $feed[0]['NotSeen'] ?? '0'; ?></a></td>
+    						<td><?= $feed[0]['Total'] ?? $feed[0]['Total'] ?? '0'; ?></td>
     					</tr>
     				</tbody>
     			</table>

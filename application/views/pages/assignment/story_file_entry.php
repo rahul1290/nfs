@@ -26,7 +26,7 @@
         <div class="card-header"></div>
         <div class="card-body">
 			
-			<form name="f1" method="POST" action="<?php echo base_url('Assign-Story-File-Entry')?>" enctype="multipart/form-data">
+			<form name="f1" method="POST" action="<?php echo base_url('Assignment/Story-File-Entry'); ?>" enctype="multipart/form-data">
             	<div class="form-group row">
                 	<label for="staticEmail" class="col-sm-2 col-form-label">Select Reporter</label>
                 	<div class="col-sm-10">

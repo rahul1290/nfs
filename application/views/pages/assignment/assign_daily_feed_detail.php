@@ -1,9 +1,19 @@
+<link href="<?php echo base_url('assets/css/');?>/video-js.css" rel="stylesheet">
+<link href="http://vjs.zencdn.net/7.0/video-js.min.css" rel="stylesheet">
+<script src="http://vjs.zencdn.net/7.0/video.min.js"></script>
+
+<script src="<?php echo base_url('assets/js/');?>/video.js"></script>
+<script src="<?php echo base_url('assets/js/');?>/videojs-playlist.js"></script> 
+<script>
+var videoList = [];
+</script>
+
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
+          <div class="col-sm-6">  
             <h1>ASSIGNMENT FEED DETAIL</h1>
           </div>
           <div class="col-sm-6">
@@ -91,44 +101,63 @@
     							<?php  
     							$thumbs = explode(',',$sigalresultview[0]['thubm']);
     							$files = explode(',',$sigalresultview[0]['files']);
-    							if(count($files)>0){
-    							    echo '<span>Select All : <input type="checkbox" id="checkall" value="" checked></span>';
-    							    echo '<div class="row">';
-    							    foreach($files as $key=>$t){
-    								    $x = explode('.', $t);
-    								    if(end($x) == 'jpg'){ ?>
-    								    	<div class="col-3">
-        								        <figure class="">
-                                                  <img width="320" height="240" class="img-fluid" src="https://thumb.ibc24.in/<?php echo $thumbs[0];?>"/>
-                                                  <figcaption>
-                                                  	<input type="checkbox" class="thumCheckbox" value="" checked>
-                                                  	<?php echo $thumbs[0]; ?>
-                                                  </figcaption>
-                                                </figure>
-                                                
-                                           	</div>
-    								    <?php } else if(end($x) == 'mp4'){ ?>
-    								    	<div class="col-3">
-            									<video class="" width="320" height="176" controls>
-                                                  <source src="http://nfs.ibc24.in/uploads/<?php echo $sigalresultview[0]['Folder_Name']; ?>/<?php echo $files[$key]; ?>" type="video/mp4">
-                                                </video>
-                                                <div>
-                                                	<input type="checkbox" class="thumCheckbox" value="" checked>
-                                                	<?php echo $t; ?>
-                                                </div>
-                                            </div>
-    									<?php } else { ?>
-    										<div class="col-3">
-        										<figure class="">
-                                                  <img class="img-fluid" src="https://thumb.ibc24.in/<?php echo $thumbs[$key];?>"/>
-                                                  <figcaption>
-                                                  	<input type="checkbox" class="thumCheckbox" value="" checked>
-                                                  	<?php echo $t; ?>
-                                                  </figcaption>
-                                                </figure>
-                                            </div>  
-    									<?php } ?>
-    								<?php  } echo '</div>'; } } ?>
+    							if(count($files)>0){ ?>
+    							    	<span>Select All : <input type="checkbox" id="checkall" value="" checked></span>
+    							    	<div class="row text-center">
+    							    		<div class="offset-2 col-6 mb-4"><video class="video-js vjs-default-skin" controls width="640px" height="360px"></video>
+        							     		<button class="previous">Previous</button>
+        							     		<button class="next">Next</button>
+        							    	</div>
+        							    	<div class="col-2" style="max-height: 380px;overflow: scroll;overflow-x: hidden;">
+        										<?php foreach($files as $key=>$t){
+            								    $x = explode('.', $t);
+            								    if(end($x) == 'mp4'){ ?>
+            										<figure>
+                                                      <img width="200" height="140" class="" src="https://thumb.ibc24.in/<?php echo $thumbs[$key];?>"/>
+                                                      <figcaption>
+                                                      	<?php echo $thumbs[$key]; ?>
+                                                      </figcaption>
+                                                    </figure>    
+            								    <?php } }?>    		
+											</div>
+										</div>
+										
+										
+										
+    							    	<div class="">
+            							  <?php foreach($files as $key=>$t){   
+            								    $x = explode('.', $t);
+            								    if(end($x) == 'jpg'){ ?>
+            								        <figure class="col-2 float-left">
+                                                     <img width="200" height="200" class="img-fluid" src="http://nfs.ibc24.in/uploads/<?php echo $sigalresultview[0]['Folder_Name']; ?>/<?php echo $thumbs[$key]; ?>"/>
+                                                      <figcaption>
+                                                      	<input type="checkbox" class="thumCheckbox" value="" checked>
+                                                      	<?php echo $thumbs[$key]; ?>
+                                                      </figcaption>
+                                                    </figure>
+            								    <?php } else if(end($x) == 'mp4'){ ?>
+            								        <script>
+            								        	videoList.push(
+                                                    		{
+                                                				sources: [{
+                                                					src: "http://nfs.ibc24.in/uploads/<?php echo $sigalresultview[0]['Folder_Name']; ?>/<?php echo $files[$key]; ?>",
+                                                   					type: 'video/mp4'
+                                                 				}]
+                                            				}
+                                                	    );
+                                                	</script>
+            								    <?php } else { ?>
+            										<figure class="col-2 float-left">
+                                                      <img class="img-fluid" src="https://thumb.ibc24.in/<?php echo $thumbs[$key];?>"/>
+                                                      <figcaption>
+                                                      	<input type="checkbox" class="thumCheckbox" value="" checked>
+                                                      	<?php echo $thumbs[$key]; ?>
+                                                      </figcaption>
+                                                    </figure>  
+            									<?php } ?>
+            								<?php  } ?>
+    									</div> 
+    									<?php } } ?>
     						</td>
     					</tr>
     					<tr>
@@ -256,6 +285,56 @@
 				}
 			});
 		});
+
+
+        var player = videojs(document.querySelector('video'), {
+          inactivityTimeout: 0,
+    	  autoplay:true,
+    	  autoadvance: 0
+        });
+    
+        try {
+          // try on ios
+          player.volume(0);
+        } catch (e) {}
+    
+        player.on([
+          'duringplaylistchange',
+          'playlistchange',
+          'beforeplaylistitem',
+          'playlistitem',
+          'playlistsorted'
+        ], function(e) {
+          videojs.log('player saw "' + e.type + '"');
+        });
+    
+        player.playlist(videoList);
+    	
+        document.querySelector('.previous').addEventListener('click', function() {
+          player.playlist.previous();
+        });
+    
+        document.querySelector('.next').addEventListener('click', function() {
+          player.playlist.next();
+        });
+    
+        Array.prototype.forEach.call(document.querySelectorAll('[name=autoadvance]'), function(el) {
+          el.addEventListener('click', function() {
+            var value = document.querySelector('[name=autoadvance]:checked').value;
+            player.playlist.autoadvance(Number(value));
+          });
+        });
+    
+        document.querySelector('[name="autoadvance"][value="null"]').click();
+    
+        var repeatCheckbox = document.querySelector('.repeat');
+    
+        repeatCheckbox.addEventListener('click', function() {
+          player.playlist.repeat(this.checked);
+        });
+    
+        repeatCheckbox.checked = false;
+      
 		
 	});
 </script>

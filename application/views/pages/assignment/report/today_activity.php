@@ -102,7 +102,7 @@
           						<td><?php echo $activity['VTEditor_Publish']; ?></td>
           						<td class="text-success text-bold"><?php echo substr($activity['Expected_OnAir'],0,8); ?></td>
           						<td>
-          							<a target="_blank" href="<?= base_url('Report/scriptFileReport/').$activity['Sno'];?>">
+          							<a target="_blank" href="<?= base_url('Assignment/report/scriptFileReport/').$activity['Sno'];?>">
 										<img src="<?php echo base_url('assets/images/'); ?>viewMore.jpg" />
 									</a>
 								</td>
@@ -181,7 +181,7 @@
           						<td><?php echo $activity['VTEditor_Publish']; ?></td>
           						<td class="text-success text-bold"><?php echo substr($activity['Expected_OnAir'],0,8); ?></td>
           						<td>
-          							<a target="_blank" href="<?= base_url('Report/scriptFileReport/').$activity['Sno'];?>">
+          							<a target="_blank" href="<?= base_url('Assignment/report/scriptFileReport/').$activity['Sno'];?>">
 										<img src="<?php echo base_url('assets/images/'); ?>viewMore.jpg" />
 									</a>
 								</td>
