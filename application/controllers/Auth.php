@@ -27,6 +27,9 @@ class Auth extends CI_Controller {
 		    else if($role == 'ASSIGNMENT'){
 		        redirect('Assignment/Daily-Feed-Status/CG/green/MP/green');
 		    }
+		    else if($role == 'VSAT'){
+		        redirect('Vsat/daily-status');
+		    }
 		} else {
 			redirect('Auth/login');
 		}

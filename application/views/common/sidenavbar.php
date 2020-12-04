@@ -171,7 +171,7 @@
                             	</a>
                           	</li>
                           	<li class="nav-item">
-                            	<a href="<?php echo base_url('Assignment/story-idea/all-report');?>" class="nav-link <?php if($this->uri->segment('3') == 'all-report') { echo "active"; }?>">
+                            	<a href="<?php echo base_url('Assignment/story-idea/all-report');?>" class="nav-link <?php if($this->uri->segment('2') == 'story-idea' && $this->uri->segment('3') == 'all-report') { echo "active"; }?>">
                               		<i class="far fa-circle nav-icon"></i>
                               		<p>ALL REPORT</p>
                             	</a>
@@ -179,7 +179,7 @@
                         </ul>
                    	</li>
                   	
-                  	<li class="nav-item has-treeview <?php if($this->uri->segment('2') == 'story-idea' && $this->uri->segment('3') == 'report') { echo "menu-open"; }?>">
+                  	<li class="nav-item has-treeview <?php if($this->uri->segment('2') == 'report') { echo "menu-open"; }?>">
                     	<a href="#" class="nav-link">
                        		<i class="nav-icon fas fa-chart-pie"></i>
                           	<p>REPORTS
@@ -188,7 +188,7 @@
                         </a>
                     	<ul class="nav nav-treeview">
                         	<li class="nav-item">
-                            	<a href="<?php echo base_url('Assignment/story-idea/report/today-activity');?>" class="nav-link <?php if($this->uri->segment('4') == 'today-activity') { echo "active"; }?>">
+                            	<a href="<?php echo base_url('Assignment/report/today-activity');?>" class="nav-link <?php if($this->uri->segment('3') == 'today-activity' || $this->uri->segment('3') == 'scriptFileReport') { echo "active"; }?>">
                               		<i class="far fa-circle nav-icon"></i>
                               		<p>TODAY'S ACTIVITY</p>
                             	</a>
@@ -200,19 +200,19 @@
                             	</a>
                           	</li>
                           	<li class="nav-item">
-                            	<a href="<?php echo base_url('Assignment/story-idea/report/all-report');?>" class="nav-link <?php if($this->uri->segment('4') == 'all-report') { echo "active"; }?>">
+                            	<a href="<?php echo base_url('Assignment/report/all-report');?>" class="nav-link <?php if($this->uri->segment('2') == 'report' && $this->uri->segment('3') == 'all-report') { echo "active"; }?>">
                               		<i class="far fa-circle nav-icon"></i>
                               		<p>ALL REPORT</p>
                             	</a>
                           	</li>
                           	<li class="nav-item">
-                            	<a href="<?php echo base_url('Report/scriptFileReport');?>" class="nav-link <?php if($this->uri->segment('2') == 'scriptFileReport') { echo "active"; }?>">
+                            	<a href="<?php echo base_url('Assignment/report/reporter-summary');?>" class="nav-link <?php if(($this->uri->segment('2') == 'report' && $this->uri->segment('3') == 'reporter-summary') || $this->uri->segment('3') == 'reporter') { echo "active"; }?>">
                               		<i class="far fa-circle nav-icon"></i>
                               		<p>REPORTER</p>
                             	</a>
                           	</li>
                           	<li class="nav-item">
-                            	<a href="<?php echo base_url('Report/scriptFileReport');?>" class="nav-link <?php if($this->uri->segment('2') == 'scriptFileReport') { echo "active"; }?>">
+                            	<a href="<?php echo base_url('Assignment/report/stringer-summary');?>" class="nav-link <?php if($this->uri->segment('3') == 'stringer-summary') { echo "active"; }?>">
                               		<i class="far fa-circle nav-icon"></i>
                               		<p>STRINGER</p>
                             	</a>
