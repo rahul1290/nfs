@@ -130,6 +130,22 @@ class Assignment_model extends CI_Model {
         return $result;
     }
     
+    function all_stringer_location_list($location=null){
+        $this->db->select('F.Name, F.Location,COUNT(*) as Total');
+        $this->db->from('FeedInfo F');
+        $this->db->join('Login L','F.Name=L.Name');
+        $this->db->where('DATE >=','" & date1 & "');
+        $this->db->where('DATE <=','" & date2 & "');
+        $this->db->where(array(
+            'L.Permission'=>'STRINGER',
+            'F.StateCode' => '" & ddlState.SelectedValue & "',
+               ));
+        $this->db->group_by('F.Location,F.NAME');
+        $this->db->order_by('Total','desc');
+        $result = $this->db->get()->result_array();
+        return $result;
+    }
+    
     function reporter_report($data){
         if($data['reporter'] == null || $data['reporter'] == ''){
             $this->db->select('L.Name,L.UID,COUNT(*) as Count');
@@ -180,8 +196,45 @@ class Assignment_model extends CI_Model {
         return $result;
     }
     
-    function reportr_feed_list($date,$uid){
+    function reporter_feed_list($date,$uid){
         $result = $this->db->query("select *,convert(varchar(5),Copy_date,108)  as Copy_Date1,convert(varchar(5),BP_date,108)  as BP_Date1,convert(varchar(5),Copy_date,108)  as Copy_Date1,convert(varchar(5),VSat_date,108)  as Vsat_Date1,convert(varchar(5),VTEditor_date,108)  as VTEditor_Date1,convert(varchar(5),assign_date,108)  as Assign_Date1,convert(varchar(5),Input_date,108)  as Input_Date1,convert(varchar(5),Editor_date,108)  as Editor_Date1 ,convert(varchar(5),Output_date,108)  as Output_Date1   ,substring(LogSheet,1,50) as LogSheet1,substring(DESCRIPTION,1,50) as DESCRIPTION1  from FeedInfo where Date='".$date."' AND UID = '".$uid."' ORDER BY SNO DESC")->result_array();
+        return $result;
+    }
+    
+    function stringer_feed_list($data){
+        $result = $this->db->query("select *,convert(varchar(5),Copy_date,108)  as Copy_Date1,convert(varchar(5),BP_date,108)  as BP_Date1,convert(varchar(5),Copy_date,108)  as Copy_Date1,convert(varchar(5),VSat_date,108)  as Vsat_Date1,convert(varchar(5),VTEditor_date,108)  as VTEditor_Date1,convert(varchar(5),assign_date,108)  as Assign_Date1,convert(varchar(5),Input_date,108)  as Input_Date1,convert(varchar(5),Editor_date,108)  as Editor_Date1 ,convert(varchar(5),Output_date,108)  as Output_Date1   ,substring(LogSheet,1,50) as LogSheet1,substring(DESCRIPTION,1,50) as DESCRIPTION1  
+                        from FeedInfo 
+                        where Date between '".$data['fromdate']."' and '".$data['todate']."'  
+                        and UID = '".$data['stringerId']."' 
+                        ORDER BY SNO DESC")->result_array();
+        return $result;
+    }
+    
+    function all_location($state){
+        $this->db->select('place');
+        $this->db->group_by('PLACE');
+        $result = $this->db->get_where('Login',array('STATECODE'=>$state,'Permission'=>'STRINGER','Active'=>'ACTIVE'))->result_array();
+        return $result;
+    }
+    
+    function stringer_report($data){
+        if($data['location'] == null || $data['location'] == ''){
+            $result = $this->db->query("SELECT F.Name,F.UID, F.Location,COUNT(*) as Total 
+                FROM FeedInfo F 
+                INNER JOIN Login L ON F.Name=l.Name 
+                where l.Permission='STRINGER' 
+                and DATE between '".$data['fromdate']."' and '".$data['todate']."'  
+                and F.StateCode='".$data['state']."' 
+                group by F.Location,F.NAME,F.UID 
+                order by Total desc")->result_array();
+        } else {
+            $result = $this->db->query("SELECT Name,UID, Location,COUNT(*) as Total 
+                FROM FeedInfo 
+                where DATE between '".$data['fromdate']."' and '".$data['todate']."' 
+                and Location='".$data['location']."' 
+                group by Location,Name,UID
+                order by Total desc")->result_array();
+        }
         return $result;
     }
 }

@@ -21,25 +21,25 @@ class Assignment_ctrl extends CI_Controller {
 		    }
 		}
 	
-	function index($cgzone,$mpzone){
+		function daily_feed_status($cgzone,$mpzone){
 	    $this->permission();
 	    $data['feed'] = $this->Assignment_model->assign_daily_feed();
 	    $data['header'] = $this->load->view('common/header','',true);
 	    $data['topnavbar'] = $this->load->view('common/topnavbar','',true);
-	    $data['sidenavbar'] = $this->load->view('common/sidenavbar','',true);
+	    $data['sidenavbar'] = $this->load->view('common/'.$this->session->userdata('role').'_sidenavbar','',true);
 	    $data['footer'] = $this->load->view('common/footer','',true);
-	    $data['body'] = $this->load->view('pages/assignment/daily_feed_status',$data,true);
+	    $data['body'] = $this->load->view('pages/assignment/daily_feed_status/daily_feed_status',$data,true);
 	    $this->load->view('common/layout',$data);
 	}
 	
-	function Assign_feed_detail($id){
+	function daily_feed_detail($id){
 	    $this->permission();
 	    $data['sigalresultview'] = $this->Assignment_model->assign_feed_detail($id);
 	    $data['header'] = $this->load->view('common/header','',true);
 	    $data['topnavbar'] = $this->load->view('common/topnavbar','',true);
-	    $data['sidenavbar'] = $this->load->view('common/sidenavbar','',true);
+	    $data['sidenavbar'] = $this->load->view('common/'.$this->session->userdata('role').'_sidenavbar','',true);
 	    $data['footer'] = $this->load->view('common/footer','',true);
-	    $data['body'] = $this->load->view('pages/assignment/assign_daily_feed_detail',$data,true);
+	    $data['body'] = $this->load->view('pages/assignment/daily_feed_status/daily_feed_detail',$data,true);
 	    $this->load->view('common/layout',$data);
 	}
 	
@@ -116,7 +116,7 @@ class Assignment_ctrl extends CI_Controller {
 	            $data['repoters'] = $this->Auth_model->reporter_list();
 	            $data['header'] = $this->load->view('common/header','',true);
 	            $data['topnavbar'] = $this->load->view('common/topnavbar','',true);
-	            $data['sidenavbar'] = $this->load->view('common/sidenavbar','',true);
+	            $data['sidenavbar'] = $this->load->view('common/'.$this->session->userdata('role').'_sidenavbar','',true);
 	            $data['footer'] = $this->load->view('common/footer','',true);
 	            $data['body'] = $this->load->view('pages/assignment/story_file_entry',$data,true);
 	            $this->load->view('common/layout',$data);
@@ -244,7 +244,7 @@ class Assignment_ctrl extends CI_Controller {
     	    $data['repoters'] = $this->Auth_model->reporter_list();
     	    $data['header'] = $this->load->view('common/header','',true);
     	    $data['topnavbar'] = $this->load->view('common/topnavbar','',true);
-    	    $data['sidenavbar'] = $this->load->view('common/sidenavbar','',true);
+    	    $data['sidenavbar'] = $this->load->view('common/'.$this->session->userdata('role').'_sidenavbar','',true);
     	    $data['footer'] = $this->load->view('common/footer','',true);
     	    $data['body'] = $this->load->view('pages/assignment/story_file_entry',$data,true);
     	    $this->load->view('common/layout',$data);
@@ -273,7 +273,7 @@ class Assignment_ctrl extends CI_Controller {
 	    $data['feed'] = $this->Assignment_model->assign_today_activity();
 	    $data['header'] = $this->load->view('common/header','',true);
 	    $data['topnavbar'] = $this->load->view('common/topnavbar','',true);
-	    $data['sidenavbar'] = $this->load->view('common/sidenavbar','',true);
+	    $data['sidenavbar'] = $this->load->view('common/'.$this->session->userdata('role').'_sidenavbar','',true);
 	    $data['footer'] = $this->load->view('common/footer','',true);
 	    $data['body'] = $this->load->view('pages/assignment/story_idea/today_activity',$data,true);
 	    $this->load->view('common/layout',$data);
@@ -284,7 +284,7 @@ class Assignment_ctrl extends CI_Controller {
 	    $data['feed'] = $this->Assignment_model->yesterdayDashboard();
 	    $data['header'] = $this->load->view('common/header','',true);
 	    $data['topnavbar'] = $this->load->view('common/topnavbar','',true);
-	    $data['sidenavbar'] = $this->load->view('common/sidenavbar','',true);
+	    $data['sidenavbar'] = $this->load->view('common/'.$this->session->userdata('role').'_sidenavbar','',true);
 	    $data['footer'] = $this->load->view('common/footer','',true);
 	    $data['body'] = $this->load->view('pages/assignment/story_idea/yesterday_dashbaord',$data,true);
 	    $this->load->view('common/layout',$data);
@@ -302,32 +302,90 @@ class Assignment_ctrl extends CI_Controller {
 	    $data['feed'] = $this->Assignment_model->allReport($date1,$date2);
 	    $data['header'] = $this->load->view('common/header','',true);
 	    $data['topnavbar'] = $this->load->view('common/topnavbar','',true);
-	    $data['sidenavbar'] = $this->load->view('common/sidenavbar','',true);
+	    $data['sidenavbar'] = $this->load->view('common/'.$this->session->userdata('role').'_sidenavbar','',true);
 	    $data['footer'] = $this->load->view('common/footer','',true);
 	    $data['body'] = $this->load->view('pages/assignment/story_idea/all_report',$data,true);
 	    $this->load->view('common/layout',$data);
 	}
 	
-	function report_today_activity(){
-	    $this->permission();
-	    $data['activities'] = $this->Assignment_model->assign_report_today_activity();
-	    $data['header'] = $this->load->view('common/header','',true);
-	    $data['topnavbar'] = $this->load->view('common/topnavbar','',true);
-	    $data['sidenavbar'] = $this->load->view('common/sidenavbar','',true);
-	    $data['footer'] = $this->load->view('common/footer','',true);
-	    $data['body'] = $this->load->view('pages/assignment/report/today_activity',$data,true);
-	    $this->load->view('common/layout',$data);
+	function today_activity($scriptfileId=null){
+	    if($scriptfileId == null){
+    	    $this->permission();
+    	    $data['activities'] = $this->Assignment_model->assign_report_today_activity();
+    	    $data['header'] = $this->load->view('common/header','',true);
+    	    $data['topnavbar'] = $this->load->view('common/topnavbar','',true);
+    	    $data['sidenavbar'] = $this->load->view('common/'.$this->session->userdata('role').'_sidenavbar','',true);
+    	    $data['footer'] = $this->load->view('common/footer','',true);
+    	    $data['body'] = $this->load->view('pages/assignment/report/today_activity/today_activity',$data,true);
+    	    $this->load->view('common/layout',$data);
+	    } else {
+	        $this->permission();
+	        $data['singleresultview'] = $this->Assignment_model->assign_feed_detail($scriptfileId);
+	        $data['header'] = $this->load->view('common/header','',true);
+	        $data['topnavbar'] = $this->load->view('common/topnavbar','',true);
+	        $data['sidenavbar'] = $this->load->view('common/'.$this->session->userdata('role').'_sidenavbar','',true);
+	        $data['footer'] = $this->load->view('common/footer','',true);
+	        $data['body'] = $this->load->view('pages/assignment/report/today_activity/today_activity_detail',$data,true);
+	        $this->load->view('common/layout',$data);
+	    }
+	}
+
+	
+	function reporter_summary($scriptfileId=null){
+	    if($scriptfileId == null){ 
+    	    $this->permission();
+    	    $data['locations'] = $this->Assignment_model->all_reporter_location_list();
+    	    $data['header'] = $this->load->view('common/header','',true);
+    	    $data['topnavbar'] = $this->load->view('common/topnavbar','',true);
+    	    $data['sidenavbar'] = $this->load->view('common/'.$this->session->userdata('role').'_sidenavbar','',true);
+    	    $data['footer'] = $this->load->view('common/footer','',true);
+    	    $data['body'] = $this->load->view('pages/assignment/report/reporter/reporter_summary',$data,true);
+    	    $this->load->view('common/layout',$data);
+	    } else {
+	        $this->permission();
+	        $data['singleresultview'] = $this->Assignment_model->assign_feed_detail($scriptfileId);
+	        $data['header'] = $this->load->view('common/header','',true);
+	        $data['topnavbar'] = $this->load->view('common/topnavbar','',true);
+	        $data['sidenavbar'] = $this->load->view('common/'.$this->session->userdata('role').'_sidenavbar','',true);
+	        $data['footer'] = $this->load->view('common/footer','',true);
+	        $data['body'] = $this->load->view('pages/assignment/report/reporter/reporter_summary_detail',$data,true);
+	        $this->load->view('common/layout',$data);
+	    }
 	}
 	
-	function reporter_summary(){
-	    $this->permission();
-	    $data['locations'] = $this->Assignment_model->all_reporter_location_list();
-	    $data['header'] = $this->load->view('common/header','',true);
-	    $data['topnavbar'] = $this->load->view('common/topnavbar','',true);
-	    $data['sidenavbar'] = $this->load->view('common/sidenavbar','',true);
-	    $data['footer'] = $this->load->view('common/footer','',true);
-	    $data['body'] = $this->load->view('pages/assignment/report/reporter_summary',$data,true);
-	    $this->load->view('common/layout',$data);
+	
+// 	function reporter_script_detail($scriptfileId){
+// 	    $this->permission();
+// 	    $data['singleresultview'] = $this->Assignment_model->assign_feed_detail($scriptfileId);
+// 	    $data['header'] = $this->load->view('common/header','',true);
+// 	    $data['topnavbar'] = $this->load->view('common/topnavbar','',true);
+// 	    $data['sidenavbar'] = $this->load->view('common/'.$this->session->userdata('role').'_sidenavbar','',true);
+// 	    $data['footer'] = $this->load->view('common/footer','',true);
+// 	    $data['body'] = $this->load->view('pages/assignment/report/reporter/script_file_report',$data,true);
+// 	    $this->load->view('common/layout',$data);
+// 	}
+	
+	
+	function stringer_summary($scriptfileId=null){
+	    if($scriptfileId == null){
+    	    $this->permission();
+    	    $data['locations'] = $this->Assignment_model->all_location('CG');
+    	    $data['header'] = $this->load->view('common/header','',true);
+    	    $data['topnavbar'] = $this->load->view('common/topnavbar','',true);
+    	    $data['sidenavbar'] = $this->load->view('common/'.$this->session->userdata('role').'_sidenavbar','',true);
+    	    $data['footer'] = $this->load->view('common/footer','',true);
+    	    $data['body'] = $this->load->view('pages/assignment/report/stringer/stringer_summary',$data,true);
+    	    $this->load->view('common/layout',$data);
+	    } else {
+    	    $this->permission();
+    	    $data['singleresultview'] = $this->Assignment_model->assign_feed_detail($scriptfileId);
+    	    $data['header'] = $this->load->view('common/header','',true);
+    	    $data['topnavbar'] = $this->load->view('common/topnavbar','',true);
+    	    $data['sidenavbar'] = $this->load->view('common/'.$this->session->userdata('role').'_sidenavbar','',true);
+    	    $data['footer'] = $this->load->view('common/footer','',true);
+    	    $data['body'] = $this->load->view('pages/assignment/report/stringer/stringer_summary_detail',$data,true);
+    	    $this->load->view('common/layout',$data);
+	    }
 	}
 	
 	
@@ -345,9 +403,21 @@ class Assignment_ctrl extends CI_Controller {
 	    $data['feed'] = $this->Assignment_model->all_report($date1,$date2);
 	    $data['header'] = $this->load->view('common/header','',true);
 	    $data['topnavbar'] = $this->load->view('common/topnavbar','',true);
-	    $data['sidenavbar'] = $this->load->view('common/sidenavbar','',true);
+	    $data['sidenavbar'] = $this->load->view('common/'.$this->session->userdata('role').'_sidenavbar','',true);
 	    $data['footer'] = $this->load->view('common/footer','',true);
-	    $data['body'] = $this->load->view('pages/assignment/report/all_report',$data,true);
+	    $data['body'] = $this->load->view('pages/assignment/report/all_report/all_report',$data,true);
+	    $this->load->view('common/layout',$data);
+	}
+	
+	
+	function allreport_detail($scriptfileId){
+	    $this->permission();
+	    $data['singleresultview'] = $this->Assignment_model->assign_feed_detail($scriptfileId);
+	    $data['header'] = $this->load->view('common/header','',true);
+	    $data['topnavbar'] = $this->load->view('common/topnavbar','',true);
+	    $data['sidenavbar'] = $this->load->view('common/'.$this->session->userdata('role').'_sidenavbar','',true);
+	    $data['footer'] = $this->load->view('common/footer','',true);
+	    $data['body'] = $this->load->view('pages/assignment/report/all_report/all_report_detail',$data,true);
 	    $this->load->view('common/layout',$data);
 	}
 	
@@ -385,28 +455,7 @@ class Assignment_ctrl extends CI_Controller {
 	    }
 	}
 	
-	function report_script_file_report($scriptfileId){
-	    $this->permission();
-	    $data['singleresultview'] = $this->Assignment_model->assign_feed_detail($scriptfileId);
-	    $data['header'] = $this->load->view('common/header','',true);
-	    $data['topnavbar'] = $this->load->view('common/topnavbar','',true);
-	    $data['sidenavbar'] = $this->load->view('common/sidenavbar','',true);
-	    $data['footer'] = $this->load->view('common/footer','',true);
-	    $data['body'] = $this->load->view('pages/assignment/report/script_file_report',$data,true);
-	    $this->load->view('common/layout',$data);
-	}
-	
-	function report_allreport_script_file_report($scriptfileId){
-	    $this->permission();
-	    $data['singleresultview'] = $this->Assignment_model->assign_feed_detail($scriptfileId);
-	    $data['header'] = $this->load->view('common/header','',true);
-	    $data['topnavbar'] = $this->load->view('common/topnavbar','',true);
-	    $data['sidenavbar'] = $this->load->view('common/sidenavbar','',true);
-	    $data['footer'] = $this->load->view('common/footer','',true);
-	    $data['body'] = $this->load->view('pages/assignment/report/all_report/script_file_report',$data,true);
-	    $this->load->view('common/layout',$data);
-	}
-	
+
 	function bifurcation(){
 	    $this->permission();
 	    $data['reporterId'] = $this->input->post('reporterId');
@@ -420,10 +469,10 @@ class Assignment_ctrl extends CI_Controller {
 	    }
 	}
 	
-	function reportr_feed_list_dateWise(){
+	function reporter_feed_list_dateWise(){
 	    $data['reporterId'] = $this->input->post('uid');
 	    $data['date'] = date('Y-m-d',strtotime(str_replace('/', '-', $this->input->post('date'))));
-	    $result = $this->Assignment_model->reportr_feed_list($data['date'],$data['reporterId']);
+	    $result = $this->Assignment_model->reporter_feed_list($data['date'],$data['reporterId']);
 	    if(count($result)>0){
 	       echo json_encode(array('data'=>$result,'status'=>200));
 	    } else {
@@ -432,15 +481,41 @@ class Assignment_ctrl extends CI_Controller {
 	}
 	
 	
-	function reporter_script_detail($scriptfileId){
-	    $this->permission();
-	    $data['singleresultview'] = $this->Assignment_model->assign_feed_detail($scriptfileId);
-	    $data['header'] = $this->load->view('common/header','',true);
-	    $data['topnavbar'] = $this->load->view('common/topnavbar','',true);
-	    $data['sidenavbar'] = $this->load->view('common/sidenavbar','',true);
-	    $data['footer'] = $this->load->view('common/footer','',true);
-	    $data['body'] = $this->load->view('pages/assignment/report/reporter/script_file_report',$data,true);
-	    $this->load->view('common/layout',$data);
+	function stringer_report(){
+	    $data['fromdate'] = date('Y-m-d',strtotime(str_replace('/', '-', $this->input->post('fromdate'))));
+	    $data['todate'] = date('Y-m-d',strtotime(str_replace('/', '-', $this->input->post('todate'))));
+	    $data['state'] = $this->input->post('state');
+	    $data['location'] = $this->input->post('location');
+	    $result = $this->Assignment_model->stringer_report($data);
+
+	    if(count($result)>0){
+	        echo json_encode(array('data'=>$result,'msg'=>'all records','status'=>200));
+	    } else {
+	        echo json_encode(array('data'=>$result,'msg'=>'all records','status'=>500));
+	    }
+	}
+	
+	function stringer_feed_list_dateWise(){
+	    $data['stringerId'] = $this->input->post('uid');
+	    $data['fromdate'] = date('Y-m-d',strtotime(str_replace('/', '-', $this->input->post('fromdate'))));
+	    $data['todate'] = date('Y-m-d',strtotime(str_replace('/', '-', $this->input->post('todate'))));
+	    
+	    $result = $this->Assignment_model->stringer_feed_list($data);
+	    if(count($result)>0){
+	        echo json_encode(array('data'=>$result,'status'=>200));
+	    } else {
+	        echo json_encode(array('status'=>500));
+	    }
+	}
+	
+	
+	function all_location($state){
+	    $result = $this->Assignment_model->all_location($state);
+	    if(count($result)>0){
+	        echo json_encode(array('data'=>$result,'status'=>200));
+	    } else {
+	        echo json_encode(array('data'=>$result,'status'=>500));
+	    }
 	}
 	
 }

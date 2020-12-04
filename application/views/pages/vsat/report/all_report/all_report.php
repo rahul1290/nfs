@@ -125,7 +125,7 @@
 			var date1 = replaceAll($('#fromdate').val(), '/', '-');
 			var date2 = replaceAll($('#todate').val(), '/', '-');
 
-			window.location.replace(baseUrl + 'Assignment/report/all-report/'+date1+'/'+date2);
+			window.location.replace(baseUrl + 'Vsat/report/all-report/'+date1+'/'+date2);
 		});
 
 
@@ -133,7 +133,7 @@
 			console.log(date);
 			$.ajax({
 	        	type: 'POST',
-	        	url: baseUrl+'Assignment/story-idea/report/all-report-list',
+	        	url: baseUrl+'Vsat/report/all-report-list',
 	        	data: {
 	            	'date' : date
 	            },
@@ -270,7 +270,7 @@
             		  						
             		  						x = x + onAir+'</td>'+
             		  						'<td>'+
-            		  							'<a target="_blank" href="'+ baseUrl +'Assignment/report/all-report/scriptFileReport/'+ value.Sno +'">'+
+            		  							'<a target="_blank" href="'+ baseUrl +'vsat/report/all-report/'+ value.Sno +'">'+
             										'<img src="'+ baseUrl +'assets/images/viewMore.jpg"/>'+
             									'</a>'+
             								'</td>'+

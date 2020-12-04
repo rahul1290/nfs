@@ -52,7 +52,7 @@
         								<td><?php echo $cgfeed['Name']; ?></td>
         								<td><?php echo $cgfeed['Time']; ?></td>
         								<td><?php echo $cgfeed['SlugID']; ?></td>
-        								<td><a target="_blank" href="<?php echo base_url('Assignment/feed-detail/').$cgfeed['Sno']; ?>"><i class="far fa-arrow nav-icon"></i><img src="<?php echo base_url('assets/images/');?>viewMore.jpg" /></a></td>
+        								<td><a target="_blank" href="<?php echo base_url('Assignment/Daily-Feed-Status/').$cgfeed['Sno']; ?>"><i class="far fa-arrow nav-icon"></i><img src="<?php echo base_url('assets/images/');?>viewMore.jpg" /></a></td>
     								</tr>
     							<?php } ?>
     						</tbody>
@@ -119,7 +119,7 @@
         								<td><?php echo $mpfeed['Name']; ?></td>
         								<td><?php echo $mpfeed['Time']; ?></td>
         								<td><?php echo $mpfeed['SlugID']; ?></td>
-        								<td><a target="_blank" href="<?php echo base_url('Assignment/feed-detail/').$mpfeed['Sno']; ?>"><i class="far fa-arrow nav-icon"></i><img src="<?php echo base_url('assets/images/');?>viewMore.jpg" /></a></td>
+        								<td><a target="_blank" href="<?php echo base_url('Assignment/Daily-Feed-Status/').$mpfeed['Sno']; ?>"><i class="far fa-arrow nav-icon"></i><img src="<?php echo base_url('assets/images/');?>viewMore.jpg" /></a></td>
     								</tr>
     							<?php } ?>
     						</tbody>

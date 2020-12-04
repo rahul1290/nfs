@@ -270,7 +270,7 @@
             		  						
             		  						x = x + onAir+'</td>'+
             		  						'<td>'+
-            		  							'<a target="_blank" href="'+ baseUrl +'Assignment/report/all-report/scriptFileReport/'+ value.Sno +'">'+
+            		  							'<a target="_blank" href="'+ baseUrl +'Assignment/report/all-report/'+ value.Sno +'">'+
             										'<img src="'+ baseUrl +'assets/images/viewMore.jpg"/>'+
             									'</a>'+
             								'</td>'+

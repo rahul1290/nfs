@@ -1,4 +1,3 @@
-<?php $role = $this->session->userdata('role'); ?>
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="<?php echo base_url();?>" class="brand-link">
@@ -9,10 +8,6 @@
       <span class="brand-text font-weight-light">NEWSFLOW</span>
     </a>
 
-    <!-- Sidebar -->
-    
-    
-    
     	<div class="sidebar">
           <!-- Sidebar user (optional) -->
           <div class="user-panel mt-3 pb-3 mb-3 d-flex">
@@ -36,116 +31,15 @@
     
           <!-- Sidebar Menu -->
           <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-            	
-              <?php if($role == 'STRINGER' || $role == 'REPORTER'){ ?>
-                  <li class="nav-item has-treeview <?php if($this->uri->segment('1') == 'Entryform') { echo "menu-open"; }?>">
-                    <a href="#" class="nav-link">
-                      <i class="nav-icon fas fa-copy"></i>
-                      <p>
-                        ENTRY FORM
-                        <i class="fas fa-angle-left right"></i>
-                      </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                      <li class="nav-item">
-                        <a href="<?php echo base_url('Entryform/storyidea');?>" class="nav-link <?php if($this->uri->segment('2') == 'storyidea') { echo "active"; }?>">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>STORY IDEA</p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="<?php echo base_url('Entryform/storyfile');?>" class="nav-link <?php if($this->uri->segment('2') == 'storyfile') { echo "active"; }?>">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>STORY FILE</p>
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-              <?php } ?>
-              
-                
-                <?php if($role == 'STRINGER' || $role == 'REPORTER'){ ?>
-                	 <li class="nav-item has-treeview <?php if($this->uri->segment('1') == 'Report') { echo "menu-open"; }?>">
-                        <a href="#" class="nav-link">
-                          <i class="nav-icon fas fa-chart-pie"></i>
-                          <p>
-                            REPORTS
-                            <i class="right fas fa-angle-left"></i>
-                          </p>
-                        </a>
-                    <ul class="nav nav-treeview">
-                      <li class="nav-item">
-                        <a href="<?php echo base_url('Report/scriptFile');?>" class="nav-link <?php if($this->uri->segment('2') == 'scriptFile') { echo "active"; }?>">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>SCRIPT FILE DASHBOARD</p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="<?php echo base_url('Report/storyIdea');?>" class="nav-link <?php if($this->uri->segment('2') == 'storyIdea') { echo "active"; }?>">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>STORY IDEA DASHBOARD</p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="<?php echo base_url('Report/scriptFileReport');?>" class="nav-link <?php if($this->uri->segment('2') == 'scriptFileReport') { echo "active"; }?>">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>SCRIPT FILE REPORT</p>
-                        </a>
-                      </li>
-        			  <li class="nav-item">
-                        <a href="<?php echo base_url('Report/storyIdeaReport');?>" class="nav-link <?php if($this->uri->segment('2') == 'storyIdeaReport') { echo "active"; }?>">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>STORY IDEA REPORT</p>
-                        </a>
-                      </li>
-                    </ul>
-                    </li>
-                     <?php if($this->session->userdata('role') == 'STRINGER'){ ?>
-                      <li class="nav-item">
-                        <a href="<?php echo base_url('Channelmonitor'); ?>" class="nav-link">
-                          <i class="nav-icon fas fa-edit"></i>
-                          <p>
-                            CHANNEL MONITORING
-                          </p>
-                        </a>
-                      </li>
-                  <?php } ?>
-                  
-                <?php } else if($role == 'WEBTEAM'){ ?>
-                    <ul class="nav nav-treeview">
-                      <li class="nav-item">
-                        <a href="<?php echo base_url('Report/scriptFile');?>" class="nav-link <?php if($this->uri->segment('2') == 'scriptFile') { echo "active"; }?>">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>TODAY'S ACTIVITY</p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="<?php echo base_url('Report/scriptFileReport');?>" class="nav-link <?php if($this->uri->segment('2') == 'scriptFileReport') { echo "active"; }?>">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>ALL REPORTS</p>
-                        </a>
-                      </li>
-                      <li class="nav-item">
-                        <a href="<?php echo base_url('Report/scriptFileReport');?>" class="nav-link <?php if($this->uri->segment('2') == 'scriptFileReport') { echo "active"; }?>">
-                          <i class="far fa-circle nav-icon"></i>
-                          <p>ALL REPORTS</p>
-                        </a>
-                      </li>
-                    </ul>
-                    
-                    
-                    
-                    
-                <?php }  else if($role == 'ASSIGNMENT'){ ?>
-                    <li class="nav-item">
-						<a href="<?php echo base_url('Assignment/Daily-Feed-Status/CG/green/MP/green'); ?>" class="nav-link <?php if($this->uri->segment('1') == 'Assign-Daily-Feed-Status' || $this->uri->segment('1') == 'Assign-feed-detail') { echo "active"; }?>">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">            	
+				<li class="nav-item">
+						<a href="<?php echo base_url('Assignment/Daily-Feed-Status/CG/green/MP/green'); ?>" class="nav-link <?php if($this->uri->segment('2') == 'Daily-Feed-Status') { echo "active"; }?>">
                         	<i class="nav-icon far fa-circle text-warning"></i>
                           	<p class="text">DAILY FEED STATUS</p>
                         </a>
                   	</li>
                   	<li class="nav-item">
-                    	<a href="<?php echo base_url('Assignment/Story-File-Entry'); ?>" class="nav-link <?php if($this->uri->segment('1') == 'Assign-Story-File-Entry') { echo "active"; }?>">
+                    	<a href="<?php echo base_url('Assignment/Story-File-Entry'); ?>" class="nav-link <?php if($this->uri->segment('2') == 'Story-File-Entry') { echo "active"; }?>">
                         	<i class="nav-icon far fa-circle text-warning"></i>
                           	<p class="text">STORY FILE ENTRY</p>
                         </a>
@@ -225,8 +119,6 @@
                           	</li>
                         </ul>
                     </li>
-                <?php } ?>
-              
               <br/>
               <li class="nav-item">
                 <a href="<?php echo base_url('Auth/logout'); ?>" class="nav-link">

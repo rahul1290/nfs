@@ -4,13 +4,13 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>ALL REPORT</h1>
+            <h1>STRINGER SUMMARY</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-			  <li class="breadcrumb-item"><a href="#">Reports</a></li>
-              <li class="breadcrumb-item active">All report</li>
+			  <li class="breadcrumb-item"><a href="#">Report</a></li>
+              <li class="breadcrumb-item active">All Stringer</li>
             </ol>
           </div>
         </div>
@@ -54,21 +54,22 @@
         				</td>
         			</tr>
         			<tr>
-        				<td>Location</td>
+    					<td>State</td>
+        				<td>
+        					<select class="form-control" id="state">
+        						<option value="CG" selected>CG</option>
+        						<option value="MP">MP</option>
+        					</select>
+        				</td>
+					</tr>    
+					<tr>					
+    					<td>Location</td>
         				<td>
         					<select class="form-control" id="location">
         						<option value="">Select location</option>
         						<?php foreach($locations as $location){ ?>
-        							<option value="<?php echo $location['Place']; ?>"><?php echo $location['Place']; ?></option>
+        							<option value="<?php echo $location['place']; ?>"><?php echo $location['place']; ?></option>
         						<?php } ?>
-        					</select>
-        				</td>
-        			</tr>
-        			<tr>
-        				<td>Reporter</td>
-        				<td>
-        					<select class="form-control" id="reporter">
-        						<option value="">All</option>
         					</select>
         				</td>
         			</tr>
@@ -95,7 +96,7 @@
 		</div>
         <div class="card-body">
         	<div class="row">
-        		<div class="col-3 table-responsive" id="reporter_feeds"></div>
+        		<div class="col-3 table-responsive" id="stringer_feeds"></div>
         		<div class="col-9">
         			<div id="accordion"></div>
         		</div>
@@ -150,98 +151,26 @@
 		});
 
 
-		$(document).on('click','#view',function(){
-			$.ajax({
-				url : baseUrl + 'Assignment_ctrl/report/reporter_report',
-				type : 'POST',
-				dataType : 'json',
-				data : {
-					'fromdate' : $('#fromdate').val(),
-					'todate' : $('#todate').val(),
-					'location' : $('#location').val(),
-					'reporter' : $('#reporter').val()
-				},
-				success:function(response){
-					var x = '<table class="table table-bordered">';
-					if(response.status == 200){
-						$.each(response.data,function(key,value){
-							x = x + '<tr>'+
-										'<td><a href="javascript:void(0);" class="feedsummary" data-uid="'+ value.UID +'" data-uname="'+ value.Name +'">'+ value.Name +'</a></td>'+
-										'<td><a href="javascript:void(0);" class="feedsummary" data-uid="'+ value.UID +'" data-uname="'+ value.Name +'">'+ value.Count +'</a></td>'+
-									'</tr>';
-						});
-		    			x = x + '</table>';
-		    			$('#reporter_feeds').html(x);
-					}
-				}
-			});	
-		});
-
 		$(document).on('click','.feedsummary',function(){
-			var that = $(this);
 			var uid = $(this).data('uid');
-			var uname = $(this).data('uname');
-			$.ajax({
-				url :baseUrl + 'Assignment_ctrl/report/reporter_report/bifurcation',
-				type : 'POST',
-				dataType : 'json',
-				data : {
-					'reporterId' : uid,
-					'fromdate' : $('#fromdate').val(),
-					'todate' : $('#todate').val(),
-				},
-				beforeSend:function(){
-					$('#accordion').html('<div class="text-center"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></div>');
-				},
-				success:function(response){
-					if(response.status == 200){
-						var x = '<p class="text-center bg-dark m-0">'+ uname +'</p>';
-						$.each(response.data,function(key,value){
-							var coll = '';
-							var show = 'show';
-							if(key != 0){
-								coll = 'collapsed';
-								show = '';
-							}
-							x = x + '<div class="card">'+
-		                        		'<div class="card-header" id="headingOne">'+
-	                          				'<h5 class="mb-0">'+
-    	                            			'<button data-id="'+key+'" data-uid="'+ uid +'" data-date="'+ value.Date +'" class="feedbtn btn '+ coll +'" data-toggle="collapse" data-target="#collapse'+key+'" aria-expanded="true" aria-controls="collapse'+key+'">'+ value.Date +'#'+ value.Count +
-    	                            			'</button>'+
-	                          				'</h5>'+
-	                        			'</div>'+
-	                        			'<div id="collapse'+key+'" class="collapse '+show+'" aria-labelledby="headingOne" data-parent="#accordion">'+
-	                          				'<div class="card-body" id="feed_list_'+key+'">'+
-	                          				'</div>'+
-	                        			'</div>'+
-			                      '</div>';
-						});
-						$('#accordion').html(x);
-						feedList(0,uid,response.data[0].Date);
-					}
-					else{
-						$('#accordion').html('No record found.');
-					}
-				},
-				error:function(){
-					$('#accordion').html('oops something went wrong try again.');
-				}
-			});
+			$('#stringer_feeds tr').removeClass('bgColor');
+			$(this).closest('tr').addClass('bgColor');
+			feedList(uid);			
 		});
 
 
-		function feedList(id,uid,date){
+		function feedList(uid){
 			$.ajax({
-				url : baseUrl + 'Assignment_ctrl/reportr_feed_list_dateWise',
+				url : baseUrl + 'Assignment_ctrl/stringer_feed_list_dateWise',
 				type : 'POST',
 				dataType : 'json',
 				data : {
-					'id' : id,
 					'uid' : uid,
-					'date' : date
+					'fromdate' : $('#fromdate').val(),
+					'todate' : $('#todate').val()
 				},
 				beforeSend:function(){
-					$('#feed_list_'+id).html('<div class="text-center"><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></div>');
+					
 				},
 				success:function(response){
 					if(response.status == 200){
@@ -372,7 +301,7 @@
 		  						
 		  						x = x + onAir+'</td>'+
 		  						'<td>'+
-		  							'<a target="_blank" href="'+ baseUrl +'Assignment/report/reporter/script/'+ value.Sno +'">'+
+		  							'<a target="_blank" href="'+ baseUrl +'Vsat/report/location-wise/'+ value.Sno +'">'+
 										'<img src="'+ baseUrl +'assets/images/viewMore.jpg"/>'+
 									'</a>'+
 								'</td>'+
@@ -380,24 +309,87 @@
 					});
 					x = x + '</tbody>'+
 						'</table>';
-            		$('#feed_list_'+id).html(x);
+            		$('#accordion').html(x);
     				} else {
-    					$('#feed_list_'+id).html('No record found.');
+    					$('#accordion').html('No record found.');
     				}
 				},
 				error:function(){
-					$('#feed_list_'+id).html('oops something went wrong try again.');
+					$('#accordion').html('oops something went wrong try again.');
 				}
 			
 			});
 		}
 		
-		$(document).on('click','.feedbtn',function(){
-			var id = $(this).data('id');
-			var uid = $(this).data('uid');
-			var date = $(this).data('date');
-			feedList(id,uid,date);
-			
+	
+		$(document).on('change','#state',function(){
+			var state = $(this).val();
+			$.ajax({
+				url : baseUrl + 'Assignment_ctrl/all_location/'+state,
+				type : 'GET',
+				dataType : 'json',
+				beforeSend : function(){
+					$('#location').html('<option value="">Select location</option>');
+				},
+				success:function(response){
+					if(response.status == 200){
+						var x = '<option value="">Select location</option>';
+						$.each(response.data,function(key,value){
+							x = x + '<option value="'+ value.place +'">'+ value.place +'</option>';
+						});
+						$('#location').html(x);
+					}
+				}
+			});
 		});
+
+
+		$(document).on('click','#view',function(){
+			var state = $('#state').val();
+			var location = $('#location').val();
+			
+			$.ajax({
+				url : baseUrl + 'Assignment_ctrl/stringer_report',
+				type : 'POST',
+				dataType : 'json',
+				data : {
+					'fromdate' : $('#fromdate').val(),
+					'todate' : $('#todate').val(),
+					'state' : $('#state').val(),
+					'location' : $('#location').val()
+				},
+				beforeSend:function(){
+				$('#stringer_feeds').html('');
+				$('#accordion').html('');	
+				},
+				success:function(response){
+					if(response.status == 200){
+						var x = '<table class="table text-center table-bordered">'+
+									'<thead class="bg-dark">'+
+										'<tr>'+
+											'<th>SNO.</th>'+
+											'<th>Name</th>'+
+											'<th>Location</th>'+
+											'<th>Total Feed</th>'+
+										'</tr>'+
+									'</thead><tbody>';
+						$.each(response.data,function(key,value){
+							x = x + '<tr>'+	
+										'<td>'+ parseInt(key+1) +'.</td>'+
+										'<td><a class="feedsummary" data-uid="'+ value.UID +'" href="javascript:void(0);">'+ value.Name +'</a></td>'+
+										'<td><a class="feedsummary" data-uid="'+ value.UID +'" href="javascript:void(0);">'+ value.Location +'</a></td>'+
+										'<td><a class="feedsummary" data-uid="'+ value.UID +'" href="javascript:void(0);">'+ value.Total +'</a></td>'+
+									'</tr>';
+						});
+						x = x + '</tbody></table>';
+						$('#stringer_feeds').html(x);
+					}
+				}	
+			});
+		});
+
+
+		$('#view').trigger('click');
 	});
+	
 </script>

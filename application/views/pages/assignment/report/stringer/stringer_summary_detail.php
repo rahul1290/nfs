@@ -20,7 +20,7 @@ var videoList = [];
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="<?php echo base_url();?>">Home</a></li>
 			  <li class="breadcrumb-item"><a href="<?php echo base_url();?>">Report</a></li>
-              	<li class="breadcrumb-item"><a href="<?php echo base_url('Assignment/report/today-activity');?>">Today's Activity</a></li>
+              	<li class="breadcrumb-item"><a href="<?php echo base_url('Assignment/report/all-report');?>">All Report</a></li>
               <li class="breadcrumb-item active">Feed deatil report</li>
             </ol>
           </div>
@@ -43,16 +43,20 @@ var videoList = [];
 				<div class="table-responsive">
     				<table class="table table-bordered table-striped">
     					<tr>
-    						<td><b>State</b></td>
-    						<td><?= $singleresultview[0]['StateCode']; ?></td>
+    						<td><b>Name</b></td>
+							<td><?= $singleresultview[0]['Name']; ?></td>
+						</tr>
+						<tr>
     						<td><b>Location</b></td>
     						<td><?= $singleresultview[0]['Location']; ?></td>
+    					</tr>
+    					<tr>
     						<td><b>City Code</b></td>
     						<td><?= $singleresultview[0]['CityCode']; ?></td>
-    						<td><b>Name</b></td>
-    						<td><?= $singleresultview[0]['Name']; ?></td>
-    						<td><b>Time</b></td>
-    						<td><?= substr($singleresultview[0]['Time'],0,8); ?></td>
+    					</tr>
+						<tr>
+    						<td><b>State</b></td>
+    						<td><?= $singleresultview[0]['StateCode']; ?></td>
     					</tr>
     					<tr>
     						<td><b>Slug&nbsp;Name</b>
@@ -62,21 +66,9 @@ var videoList = [];
     						</td>
     					</tr>
     					<tr>
-    						<td><b>Anchor</b></td>
+    						<td><b>Script</b></td>
     						<td colspan="9">
     							<?= $singleresultview[0]['Description']; ?>
-    						</td>
-    					</tr>
-    					<tr>
-    						<td><b>VO</b></td>
-    						<td colspan="9" style="word-break: break-word;">
-    							<?= $singleresultview[0]['VO']; ?>
-    						</td>
-    					</tr>
-    					<tr>
-    						<td><b>Byte</b></td>
-    						<td colspan="9" style="word-break: break-word;">
-    							<?= $singleresultview[0]['Byte']; ?>
     						</td>
     					</tr>
     					<tr>
@@ -151,12 +143,6 @@ var videoList = [];
     									<?php } } ?>
     						</td>
     					</tr>
-    					<tr>
-    						<td><b>Ingest Id</b></td>
-    						<td colspan="9" class="bg-dark">
-    							<?= $singleresultview[0]['Raw_Footage']; ?>
-    						</td>
-    					</tr>
     					</table>
     					
     					<table class="offset-2 table table-bordered table-striped col-8">
@@ -199,40 +185,32 @@ var videoList = [];
     					<tr>
     						<td><b>Output Status</b></td>
     						<td>
-    							<img class="statusImg" src="<?php echo base_url('assets/').$singleresultview[0]['Output_Status']; ?>" />
+    							<img class="statusImg" src="<?php echo base_url('assets/images/').$singleresultview[0]['Output_Status']; ?>" />
     							<span><?php echo $singleresultview[0]['OUTPUT_TIME']; ?></span>
     						</td>
     						<td><b>Output Remarks</b></td>
     						<td><?php echo $singleresultview[0]['Output_Remarks']; ?></td>
     					</tr>
     					<tr>
+    						<td colspan="2"><b>Expected Onair</b></td>
+    						<td colspan="2"><?php echo substr($singleresultview[0]['Expected_OnAir'],0,8); ?></td>
+    					</tr>
+    					<tr>
     						<td><b>Copy Story Format</b></td>
     						<td>
     							<img class="statusImg" src="<?php echo base_url('assets/').$singleresultview[0]['Copy_Status']; ?>" />
-    							<span><?php echo $singleresultview[0]['Format']; ?></span>
+    							<span><?php echo substr($singleresultview[0]['Copy_Date'],11,5); ?></span>
     						</td>
     						<td><b>Copy Remarks</b></td>
     						<td><?php echo $singleresultview[0]['Copy_Remarks']; ?></td>
     					</tr>
     					<tr>
-    						<td colspan="2"><b>Expected Onair</b></td>
-    						<td colspan="2"><?php echo substr($singleresultview[0]['Expected_OnAir'],0,8); ?></td>
-    					</tr>
-    					<tr>
-    						<td colspan="2"><b>VTEditor Publish</b></td>
-    						<td colspan="2">
-    							<?php echo $singleresultview[0]['VTEditor_Publish']; ?>
+    						<td><b>VTEditor Statua</b></td>
+    						<td>
+    							<img class="statusImg" src="<?php echo base_url('assets/').$singleresultview[0]['VTEditor_Status']; ?>" />
     						</td>
-    					</tr>
-    					<tr>
-    						<td colspan="2"><b>VT Editor Remarks</b></td>
-    						<td colspan="2"><?php echo $singleresultview[0]['VTEditor_Remarks']; ?></td>
-    					</tr>
-    					<tr>
-    						<td><b>Video Quality</b></td>
-    						<td><?php echo $singleresultview[0]['VT_VideoQuality']; ?></td>
-    						<td><b>Audio Quality</b></td>
-    						<td><?php echo $singleresultview[0]['VT_AudioQuality']; ?></td>
+    						<td><b>VT Editor Remarks</b></td>
+    						<td><?php echo $singleresultview[0]['VTEditor_Remarks']; ?></td>
     					</tr>
     					<tr>
     						<td colspan="10" class="text-center">
