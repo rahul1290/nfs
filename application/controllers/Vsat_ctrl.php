@@ -1,6 +1,5 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Vsat_ctrl extends CI_Controller {
 	
 	public function __construct(){
@@ -23,6 +22,13 @@ class Vsat_ctrl extends CI_Controller {
 		
 		function daily_status(){
 		    $this->permission();
+		    $data['activities'] = $this->Vsat_model->report_today_activity();
+		    $data['header'] = $this->load->view('common/header','',true);
+		    $data['topnavbar'] = $this->load->view('common/topnavbar','',true);
+		    $data['sidenavbar'] = $this->load->view('common/'.$this->session->userdata('role').'_sidenavbar','',true);
+		    $data['footer'] = $this->load->view('common/footer','',true);
+		    $data['body'] = $this->load->view('pages/vsat/daily_status',$data,true);
+		    $this->load->view('common/layout',$data);
 		}
 		
 		function daily_status_detail(){
