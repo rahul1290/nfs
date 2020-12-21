@@ -39,6 +39,19 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             	
               <?php if($role == 'STRINGER' || $role == 'REPORTER'){ ?>
+              	  <li class="mb-2">
+              	  	<form class="form-inline">
+        				<div class="input-group input-group-sm">
+        					<input id="search" class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+        					<div class="input-group-append">
+        			  			<button class="btn btn-navbar" id="btn-search" type="button" style="background-color: white;">
+        							<i class="fas fa-search"></i>
+        			  			</button>
+        					</div>
+        				</div>
+        			</form>
+              	  </li>
+              	  
                   <li class="nav-item has-treeview <?php if($this->uri->segment('1') == 'Entryform') { echo "menu-open"; }?>">
                     <a href="#" class="nav-link">
                       <i class="nav-icon fas fa-copy"></i>

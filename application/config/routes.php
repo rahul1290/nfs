@@ -4,6 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $route['default_controller'] = 'Auth';
 
+$route['search/(:any)'] = 'search_ctrl/search/$1';
+
 /////Assignment///////////
 $route['Assignment/Daily-Feed-Status/CG/(:any)/MP/(:any)']  = 'Assignment_ctrl/daily_feed_status/$1/$2';
 $route['Assignment/Daily-Feed-Status/(:any)']               = 'Assignment_ctrl/daily_feed_detail/$1';

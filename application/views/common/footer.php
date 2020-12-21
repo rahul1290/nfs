@@ -1,3 +1,12 @@
+
+<script>
+	let baseUrl = $('#baseUrl').val();
+	$(document).on('click','#btn-search',function(){
+		var str = $('#search').val();
+		window.location.replace(baseUrl + 'search/'+ str);
+	});
+</script>
+
 <!--<footer class="main-footer">
     <div class="float-right d-none d-sm-block">
       <b>Version</b> 3.0.5

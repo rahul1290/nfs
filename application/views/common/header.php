@@ -80,13 +80,12 @@
 <script src="<?php echo base_url('assets/');?>plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
 	
 </head>
+
 <div class="modal fade" id="loaderModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog" role="document">
 		<img src="" />
 	  </div>
 	</div>
-	
-	
 	
 	<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">
@@ -103,5 +102,8 @@
 			</div>
 		</div>
 	</div>
+	
+	
+
 
 
