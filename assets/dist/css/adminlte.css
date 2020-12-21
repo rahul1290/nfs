@@ -1,3 +1,4 @@
+
 /*!
  *   AdminLTE v3.0.5
  *   Author: Colorlib
@@ -3754,7 +3755,7 @@ input[type="button"].btn-block {
 
 .input-group-sm > .form-control:not(textarea),
 .input-group-sm > .custom-select {
-  height: calc(1.8125rem + 2px);
+  height: calc(1.8125rem + 10px);
 }
 
 .input-group-sm > .form-control,
@@ -3763,7 +3764,7 @@ input[type="button"].btn-block {
 .input-group-sm > .input-group-append > .input-group-text,
 .input-group-sm > .input-group-prepend > .btn,
 .input-group-sm > .input-group-append > .btn {
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 1.5rem;
   font-size: 0.875rem;
   line-height: 1.5;
   border-radius: 0.2rem;
@@ -8258,7 +8259,7 @@ button.bg-dark:focus {
 
 .mt-4,
 .my-4 {
-  margin-top: 1.5rem !important;
+  margin-top: 2.0rem !important;
 }
 
 .mr-4,

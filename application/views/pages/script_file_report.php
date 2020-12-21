@@ -3,10 +3,22 @@
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
+          <div class="col-sm-4">
             <h1>SCRIPT FILE REPORT</h1>
           </div>
-          <div class="col-sm-6">
+			   <div class="col-sm-4">
+			  <form class="form-inline ">
+			<div class="input-group input-group-sm">
+			<input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+			<div class="input-group-append">
+			  <button class="btn btn-navbar" type="submit" style="background-color: #00000024;">
+				<i class="fas fa-search" style="font-size:large !important;"></i>
+			  </button>
+			</div>
+			</div>
+			</form>
+			</div>
+          <div class="col-sm-4">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
 			  <li class="breadcrumb-item"><a href="<?php ?>">Reports</a></li>

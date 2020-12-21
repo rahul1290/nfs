@@ -158,11 +158,13 @@ class Entryform extends CI_Controller {
         $error_no = curl_errno($ch);
         //echo $error_no;
         curl_close ($ch);
+		
+		//file_put_contents(realpath('error_report/error.txt'), $error_no,FILE_APPEND);
         if ($error_no == 0) {
-			//unlink('./uploads/'.$file);
-			//return true;
+			unlink('/tmp/'.$original_file);
+			return true;
         } else {
-			//return false;
+			return false;
         } 
     }
 
@@ -183,10 +185,12 @@ class Entryform extends CI_Controller {
         //echo $error_no;
         curl_close ($ch);
         if ($error_no == 0) {
+			
+			unlink('/tmp/'.$file);
 			//unlink('./uploads/'.$file);
-			//return true;
+			return true;
         } else {
-			//return false;
+			return false;
         } 
 	}
 	
