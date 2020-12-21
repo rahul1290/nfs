@@ -5,6 +5,15 @@
 		var str = $('#search').val();
 		window.location.replace(baseUrl + 'search/'+ str);
 	});
+
+	$('#search').keypress(function (e) {
+		 var key = e.which;
+		 if(key == 13){
+			var str = $('#search').val();
+			window.location.replace(baseUrl + 'search/'+ str);  
+		  }
+		});   
+	
 </script>
 
 <!--<footer class="main-footer">
