@@ -161,6 +161,7 @@ class Entryform extends CI_Controller {
 		
 		//file_put_contents(realpath('error_report/error.txt'), $error_no,FILE_APPEND);
         if ($error_no == 0) {
+			chmod('/tmp/'.$original_file,0777);
 			unlink('/tmp/'.$original_file);
 			return true;
         } else {
@@ -185,7 +186,7 @@ class Entryform extends CI_Controller {
         //echo $error_no;
         curl_close ($ch);
         if ($error_no == 0) {
-			
+			chmod('/tmp/'.$file,0777);
 			unlink('/tmp/'.$file);
 			//unlink('./uploads/'.$file);
 			return true;

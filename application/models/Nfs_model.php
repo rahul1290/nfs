@@ -27,7 +27,7 @@ class Nfs_model extends CI_Model {
 		// ));
 		
 		
-		$this->db->query("INSERT INTO StoryIdea (Name,Location,CityCode,StateCode,StoryId,UID,Description,Date,Approval_Status,Approval_Remarks,Approval_date,Approved_By,StoryIdeaID,Time) VALUES ('".$data['name']."', '".$data['location']."', '".$data['citycode']."', '".$data['statecode']."', '".$data['storyid']."', '".$data['uid']."', N'".$data['description']."', '".$data['date']."', '".$data['approval_status']."', '".$data['approval_remarks']."', '".$data['approval_date']."', '".$data['approved_by']."', '".$data['storyIdeaID']."', '".$data['time']."')");
+		$this->db->query("INSERT INTO StoryIdea (Name,Location,CityCode,StateCode,StoryId,UID,Description,Date,Approval_Status,Approval_Remarks,Approval_date,Approved_By,StoryIdeaID,Time) VALUES ('".$data['name']."', '".$data['location']."', '".$data['citycode']."', '".$data['statecode']."', '".$data['storyid']."', '".$data['uid']."', N'".$data['description']."', '".$data['date']."', NULL, NULL, NULL, NULL, '".$data['storyIdeaID']."', '".$data['time']."')");
 		
 		return $this->db->insert_id();
 	}
